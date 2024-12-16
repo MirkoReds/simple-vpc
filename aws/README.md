@@ -1,3 +1,5 @@
+EDIT : This version allows to create all the resources with the owner_name tag appended, so that it's possible for multiple users to use the script on the same account.
+
 Simple example for creating a VPC in AWS
 
 Usage:
