@@ -12,7 +12,7 @@ resource "aws_instance" "database" {
   associate_public_ip_address = true
 
   tags = {
-    Name        = "Simple Database Host"
+    Name        = "${var.owner_name}-Simple Database Host"
     description = "Database host for Bootcamp - Managed by Terraform"
     Owner_Name  = var.owner_name
     Owner_Email = var.owner_email

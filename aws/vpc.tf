@@ -8,7 +8,7 @@ resource "aws_vpc" "vpc" {
   enable_dns_hostnames = true
 
   tags = {
-    Name = "simple-vpc"
+    Name = "{var.owner_name}-simple-vpc"
   }
 }
 
@@ -16,14 +16,14 @@ resource "aws_internet_gateway" "internet-gateway" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name = "Simple IGW"
+    Name = "{var.owner_name}-Simple IGW"
   }
 }
 
 resource "aws_eip" "nat_eip" {
   depends_on = [aws_internet_gateway.internet-gateway]
   tags = {
-    Name = "Simple EIP"
+    Name = "{var.owner_name}-Simple EIP"
   }
 }
 
@@ -33,7 +33,7 @@ resource "aws_nat_gateway" "nat" {
   subnet_id     = aws_subnet.bootcamp-public-subnet[0].id
 
   tags = {
-    Name        = "Simple NAT"
+    Name        = "{var.owner_name}-Simple NAT"
   }
 }
 
@@ -46,7 +46,7 @@ resource "aws_subnet" "bootcamp-public-subnet" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "Simple Public Subnet ${count.index}"
+    Name = "{var.owner_name}-Simple Public Subnet ${count.index}"
   }
 }
 
@@ -54,7 +54,7 @@ resource "aws_route_table" "public-route-table" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name = "Simple Public Route Table"
+    Name = "{var.owner_name}-Simple Public Route Table"
   }
 }
 
@@ -63,7 +63,7 @@ resource "aws_route_table" "private-route-table" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name = "Simple Private Route Table"
+    Name = "{var.owner_name}-Simple Private Route Table"
   }
 }
 
@@ -94,7 +94,7 @@ resource "aws_subnet" "bootcamp-private-subnet" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "Simple Private Subnet ${count.index}"
+    Name = "{var.owner_name}-Simple Private Subnet ${count.index}"
   }
 }
 
@@ -125,7 +125,7 @@ resource "aws_security_group" "all-bootcamp" {
   }
 
   tags = {
-    Name = "Bootcamp Internal Access"
+    Name = "{var.owner_name}-Bootcamp Internal Access"
     owner_email = var.owner_email
     owner_name = var.owner_name
   }
@@ -152,7 +152,7 @@ resource "aws_security_group" "external-access" {
   }
 
   tags = {
-    Name = "Bootcamp External Access"
+    Name = "{var.owner_name}-Bootcamp External Access"
     owner_email = var.owner_email
     owner_name = var.owner_name
   }
